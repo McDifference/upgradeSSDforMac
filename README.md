@@ -5,8 +5,8 @@ Catalina 10.15.4 (19E287)
 
 Upgrade to 500G SSD  
 
-Buy a Samsung 970 Evo Plus  
-Buy a 转接头、导热硅胶片、螺丝刀(五角星、六角星各一)  
+购买Samsung 970 EVO Plus 500G  
+购买转接头、导热硅胶片、螺丝刀(五角星、六角星各一)  
 淘宝(迪奥科技)可以把除SSD外的上述工具买齐  
 
 Time Machine备份  
