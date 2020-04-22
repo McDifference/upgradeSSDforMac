@@ -10,6 +10,8 @@ Upgrade to 500G SSD
 购买转接头、导热硅胶片、螺丝刀(五角星、六角星各一)  
 淘宝(迪奥科技)可以把除SSD外的上述工具买齐  
 
+先把MacOS更新到最新版，以便支持更多的硬盘协议  
+
 Time Machine备份  
 进入Disk Utility把移动硬盘格式化为Mac OS Extended (Journaled)  
 https://support.apple.com/zh-cn/HT201250  
