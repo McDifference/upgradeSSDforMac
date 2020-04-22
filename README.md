@@ -28,4 +28,4 @@ https://support.apple.com/zh-cn/HT201295
 
 检查SSD是否接触良好 
 左上角苹果图标 -> About This Mac -> System Report -> NVMExpress 
-Link Width:	x4 说明没问题(应该是) 
+如果显示Link Width:	x4 说明没问题(应该是) 
