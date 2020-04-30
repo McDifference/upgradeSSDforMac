@@ -48,8 +48,9 @@ https://support.apple.com/zh-cn/HT201295
 另外也有建议重置NVRAM的  
 https://support.apple.com/zh-cn/HT204063  
 
-重置SMC后如果在使用电池的情况下合盖休眠一段时间后，开盖发现无法唤醒并自动重启，有可能是Paragon NTFS的原因  
-关掉Paragon NTFS后可能可以解决  
+我自己的情况是，重置SMC前发热比较厉害  
+重置SMC后则发现在不插电源的情况下合盖休眠一段时间后，开盖发现无法唤醒并自动重启  
+这有可能是Paragon NTFS的原因，关掉Paragon NTFS后可能可以解决  
 
 检查SSD是否接触良好  
 左上角苹果图标 -> About This Mac -> System Report -> NVMExpress  
