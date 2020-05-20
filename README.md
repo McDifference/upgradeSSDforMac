@@ -64,7 +64,8 @@ https://support.apple.com/zh-cn/HT204063
 网上找到很多人都有这种情况，共同点就是更换过硬盘并系统升级到了Catalina  
 原因在于Catalina下休眠后从硬盘恢复会出错。具体而言，
 ```
-在hibernatemode 3情形下，其休眠受standbydelayhigh和standbydelaylow的两个数值之间的某个时间点，机器自动将内存里的数据写入到硬盘。而第三方的硬盘往往无法在此过程中被识别出来，导致了长时间休眠后睡死唤不醒。
+在hibernatemode 3情形下，其休眠受standbydelayhigh和standbydelaylow的两个数值之间的某个时间点，机器自动将内存里的数据写入到硬盘。  
+而第三方的硬盘往往无法在此过程中被识别出来，导致了长时间休眠后睡死唤不醒。
 ```   
 (https://blog.csdn.net/hitpisces/article/details/90907498)
 
@@ -81,13 +82,24 @@ Hibernate mode : supports values of 0, 3, or 25.
 
 Whether or not a hibernation image gets written is also dependent on the values of standby and autopoweroff.
 
-0 by default on desktops. The system will not back memory up to persistent storage (the disk). The system must wake from the contents of memory; the system will lose context on power loss. This is, historically, plain old sleep.
+0 by default on desktops.   
+The system will not back memory up to persistent storage (the disk).   
+The system must wake from the contents of memory; the system will lose context on power loss.   
+This is, historically, plain old sleep.
 
-3 by default on portables. The system will store a copy of memory to persistent storage (the disk), and will power memory duringsleep. The system will wake from memory, unless a power loss forces it to restore from hibernate image.
+3 by default on portables.   
+The system will store a copy of memory to persistent storage (the disk), and will power memory duringsleep.   
+The system will wake from memory, unless a power loss forces it to restore from hibernate image.
 
-25 is only settable via pmset. The system will store a copy of memory to persistent storage (the disk), and will remove power to memory. The system will restore from disk image. If you want "hibernation" slower sleeps, slower wakes, and better battery life, you should use this setting.
+25 is only settable via pmset.   
+The system will store a copy of memory to persistent storage (the disk), and will remove power to memory.   
+The system will restore from disk image.   
+If you want "hibernation" slower sleeps, slower wakes, and better battery life, you should use this setting.
 
-standby causes kernel power management to automatically hibernate a machine after it has slept for a specified time period. This saves power while asleep. This setting defaults to ON for supported hardware. The setting standby will be visible in pmset -g if the feature is supported on this machine.
+standby causes kernel power management to automatically hibernate a machine after it has slept for a specified time period.   
+This saves power while asleep.   
+This setting defaults to ON for supported hardware.   
+The setting standby will be visible in pmset -g if the feature is supported on this machine.
 ```  
 
 解决方法：  
