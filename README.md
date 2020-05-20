@@ -72,8 +72,8 @@ https://support.apple.com/zh-cn/HT204063
 可以在terminal中查看Power Management的standby和hibernate模式  
 ```pmset -g```  
 若standby为1且在电池模式下  
-1. 若电量大于highstandbythreshold，则在睡眠standbydelayhigh秒后把内存的内容(sleep image)写入硬盘  
-2. 若电量小于highstandbythreshold，则在睡眠standbydelaylow秒后把内存的内容(sleep image)写入硬盘  
+1. 若电量大于highstandbythreshold，则在睡眠standbydelayhigh秒后把内存的内容(hibernation image)写入硬盘  
+2. 若电量小于highstandbythreshold，则在睡眠standbydelaylow秒后把内存的内容(hibernation image)写入硬盘  
 (https://www.qiansw.com/in-depth-study-of-mac-os-sleep-mode.html)  
 
 关于macOS的睡眠(sleep)、休眠(hibernate)以及standby模式的资料如下： 
@@ -121,4 +121,4 @@ autopoweroffdelay specifies the delay, in seconds, before entering autopoweroff 
 ```sudo pmset -a standby 0```    
 
 后续问题：  
-禁用standby后，拔掉电源sleep一段时间后不会进入hibernate，但会同时把内存的内容制作成镜像(sleep image)写入硬盘。因此电脑会持续给内存供电，唤醒时从内存唤醒，除非电池没电了才会从硬盘唤醒。这虽然解决了第三方硬盘不支持standby模式的问题，但也会导致睡眠时电池耗电加快。  
+禁用standby后，拔掉电源sleep一段时间后不会进入hibernate，但会同时把内存的内容制作成镜像(hibernation image)写入硬盘。因此电脑会持续给内存供电，唤醒时从内存唤醒，除非电池没电了才会从硬盘唤醒。这虽然解决了第三方硬盘不支持standby模式的问题，但也会导致睡眠时电池耗电加快。  
