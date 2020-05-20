@@ -61,7 +61,7 @@ https://support.apple.com/zh-cn/HT204063
 
 问题出现的原因：  
 
-网上找到很多人都有这种情况，共同点就是更换过硬盘并系统升级到了Catalina  
+网上找到很多人都有这种情况，共同点就是更换过硬盘并系统升级到了Catalina (https://www.reddit.com/r/MacOS/comments/dme38s/sleep_wake_failure_in_efi/)  
 原因在于Catalina下休眠后从硬盘恢复会出错。具体而言，
 ```
 在hibernatemode 3情形下，其休眠受standbydelayhigh和standbydelaylow的两个数值之间的某个时间点，机器自动将内存里的数据写入到硬盘。  
@@ -118,8 +118,7 @@ autopoweroffdelay specifies the delay, in seconds, before entering autopoweroff 
 解决方法：  
 
 禁用standby  
-```sudo pmset -a standby 0```  
-参考资料(https://www.reddit.com/r/MacOS/comments/dme38s/sleep_wake_failure_in_efi/)  
+```sudo pmset -a standby 0```    
 
 后续问题：  
 禁用standby后，拔掉电源sleep一段时间后不会进入hibernate，但会同时把内存的内容制作成镜像(sleep image)写入硬盘。因此电脑会持续给内存供电，唤醒时从内存唤醒，除非电池没电了才会从硬盘唤醒。这虽然解决了第三方硬盘不支持standby模式的问题，但也会导致睡眠时电池耗电加快。  
