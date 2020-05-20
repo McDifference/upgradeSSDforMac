@@ -120,10 +120,15 @@ autopoweroffdelay specifies the delay, in seconds, before entering autopoweroff 
 
 解决方法：  
 
-禁用standby和autopoweroff  
+由于我只在电池模式下才出现问题，我只禁用电池模式下的standby和autopoweroff  
 ```
-sudo pmset -a standby 0
-sudo pmset -a autopoweroff 0
+sudo pmset -b standby 0
+sudo pmset -b autopoweroff 0
+```    
+电源模式下的standby和autopoweroff仍然保持为开启。若要手动开启电源模式的standby和autopoweroff  
+```
+sudo pmset -c standby 1
+sudo pmset -c autopoweroff 1
 ```    
 
 后续问题：  
