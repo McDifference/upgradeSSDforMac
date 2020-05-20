@@ -78,23 +78,25 @@ https://support.apple.com/zh-cn/HT204063
 
 关于macOS的睡眠(sleep)、休眠(hibernate)以及standby模式的资料如下： 
 ```
-Hibernate mode : supports values of 0, 3, or 25.
+hibernatemode supports values of 0, 3, or 25.   
+Whether or not a hibernation image gets written is also dependent on the values of standby and autopoweroff  
 
-Whether or not a hibernation image gets written is also dependent on the values of standby and autopoweroff.
+For example, on desktops that support standby a hibernation image will be written after the specified standbydelay time.  
+To disable hibernation images completely, ensure hibernatemode standby and autopoweroff are all set to 0.  
 
-0 by default on desktops.   
-The system will not back memory up to persistent storage (the disk).   
-The system must wake from the contents of memory; the system will lose context on power loss.   
-This is, historically, plain old sleep.
+hibernatemode = 0 by default on desktops.  
+The system will not back memory up to persistent storage. The system must wake from the contents of memory; the system will lose context on power loss. This is, historically, plain old sleep.  
 
-3 by default on portables.   
-The system will store a copy of memory to persistent storage (the disk), and will power memory duringsleep.   
-The system will wake from memory, unless a power loss forces it to restore from hibernate image.
+hibernatemode = 3 by default on portables.  
+The system will store a copy of memory to persistent storage (the disk), and will power memory during sleep.  
+The system will wake from memory, unless a power loss forces it to restore from hibernate image.  
 
-25 is only settable via pmset.   
-The system will store a copy of memory to persistent storage (the disk), and will remove power to memory.   
-The system will restore from disk image.   
-If you want "hibernation" slower sleeps, slower wakes, and better battery life, you should use this setting.
+hibernatemode = 25 is only settable via pmset.  
+The system will store a copy of memory to persistent storage (the disk), and will remove power to memory.  
+The system will restore from disk image.  
+If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you should use this setting.  
+
+Please note that hibernatefile may only point to a file located on the root volume.  
 ```  
 ```
 standby causes kernel power management to automatically hibernate a machine after it has slept for a specified time period.  
