@@ -109,7 +109,8 @@ standbydelayhigh is used when the remaining battery capacity is above highstandb
 highstandbythreshold has a default value of 50 percent.  
 ```  
 ```
-autopoweroff is enabled by default on supported platforms as an implementation of Lot 6 to the European Energy-related Products Directive.  After sleeping for <autopoweroffdelay> seconds, the system will write a hibernation image and go into a lower power chipset sleep.  
+autopoweroff is enabled by default on supported platforms as an implementation of Lot 6 to the European Energy-related Products Directive.  
+After sleeping for <autopoweroffdelay> seconds, the system will write a hibernation image and go into a lower power chipset sleep.  
 Wakeups from this state will take longer than wakeups from regular sleep.  
 
 autopoweroffdelay specifies the delay, in seconds, before entering autopoweroff mode.  
