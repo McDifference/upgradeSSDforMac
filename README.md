@@ -72,7 +72,7 @@ https://support.apple.com/zh-cn/HT204063
 因此我的情况应该是出现在autopoweroff。我的autopoweroffdelay是28800即8小时，也就是睡眠了一个晚上超过8小时后进行了autopoweroff，然后无法从硬盘唤醒。  
 
 可以在terminal中查看Power Management的standby和hibernate模式  
-```pmset -g```  
+```pmset -g custom```  
 若standby为1且在电池模式下  
 1. 若电量大于highstandbythreshold，则在睡眠standbydelayhigh秒后把内存的内容(hibernation image)写入硬盘  
 2. 若电量小于highstandbythreshold，则在睡眠standbydelaylow秒后把内存的内容(hibernation image)写入硬盘  
