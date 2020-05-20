@@ -42,16 +42,52 @@ Format:APFS, Scheme:GUID Partition Map
 插上移动硬盘  
 从Time Machine恢复备份  
 
-如果发热太厉害，可以考虑重置SMC   
-https://support.apple.com/zh-cn/HT201295  
-
-另外也有建议重置NVRAM的  
-https://support.apple.com/zh-cn/HT204063  
-
-我自己的情况是，重置SMC前发热比较厉害  
-重置SMC后则发现在不插电源的情况下合盖休眠一段时间后，开盖发现无法唤醒并自动重启  
-这有可能是Paragon NTFS的原因，关掉Paragon NTFS后可能可以解决  
-
 检查SSD是否接触良好  
 左上角苹果图标 -> About This Mac -> System Report -> NVMExpress  
-如果显示Link Width:	x4 说明没问题(应该是)  
+如果显示Link Width:	x4 说明没问题(应该是)
+
+更换SSD后出现的问题： 
+
+1. 每次睡眠后的唤醒速度都比较慢，无论插着电源还是使用电池，而且唤醒时发热很严重，风扇高速转动  
+于是我重置了SMC   
+https://support.apple.com/zh-cn/HT201295  
+也有建议顺便重置NVRAM的  
+https://support.apple.com/zh-cn/HT204063  
+我重置SMC后，唤醒速度变快了，而且发热低，唤醒时也听不到风扇转动，但出现了另一个问题   
+
+2. 重置SMC后发现在不插电源的情况下合盖休眠一段时间后，开盖无法唤醒，系统自动重启，或者在输入开机密码后死机必须手动重启，重启后会弹出Sleep Wake Failure In EFI的错误提示  
+重置SMC和NVRAM也解决不了问题  
+有人说可能是Paragon NTFS的原因，我关掉Paragon NTFS并关闭开机时自动开启，关掉它在顶部状态栏的图标，也解决不了问题  
+
+问题出现的原因：  
+
+网上找到很多人都有这种情况，共同点就是更换过硬盘并系统升级到了Catalina  
+个人分析，原因在于Catalina下休眠后从硬盘恢复会出错  
+关于macOS的睡眠(sleep)、休眠(hibernate)以及standby模式的资料如下： 
+/```
+Hibernate mode : supports values of 0, 3, or 25.
+
+Whether or not a hibernation image gets written is also dependent on the values of standby and autopoweroff.
+
+0 by default on desktops. The system will not back memory up to persistent storage (the disk). The system must wake from the contents of memory; the system will lose context on power loss. This is, historically, plain old sleep.
+
+3 by default on portables. The system will store a copy of memory to persistent storage (the disk), and will power memory duringsleep. The system will wake from memory, unless a power loss forces it to restore from hibernate image.
+
+25 is only settable via pmset. The system will store a copy of memory to persistent storage (the disk), and will remove power to memory. The system will restore from disk image. If you want "hibernation" slower sleeps, slower wakes, and better battery life, you should use this setting.
+
+standby causes kernel power management to automatically hibernate a machine after it has slept for a specified time period. This saves power while asleep. This setting defaults to ON for supported hardware. The setting standby will be visible in pmset -g if the feature is supported on this machine.
+/```
+
+解决方法：  
+查看standby和hibernate模式   
+/```
+pmset -g
+/```
+禁用standby
+/```
+sudo pmset -a standby 0
+/```
+参考资料(https://www.reddit.com/r/MacOS/comments/dme38s/sleep_wake_failure_in_efi/)  
+
+后续问题：  
+禁用standy后，拔掉电源sleep一段时间后不会进入hibernate，因此电脑会持续给内存供电，唤醒时从内存唤醒，不会从硬盘唤醒，这会导致电池耗电加快  
