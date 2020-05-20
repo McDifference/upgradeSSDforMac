@@ -67,7 +67,9 @@ https://support.apple.com/zh-cn/HT204063
 在hibernatemode 3情形下，其休眠受standbydelayhigh和standbydelaylow的两个数值之间的某个时间点，机器自动将内存里的数据写入到硬盘。  
 而第三方的硬盘往往无法在此过程中被识别出来，导致了长时间休眠后睡死唤不醒。
 ```   
-(https://blog.csdn.net/hitpisces/article/details/90907498)
+(https://blog.csdn.net/hitpisces/article/details/90907498)  
+我个人认为不只是因为第三方硬盘不支持standby模式，而是不支持从硬盘唤醒，因为我的standbydelayhigh为86400即24小时，standbydelaylow为10800即为3小时，我的情况一般是电池往往在100%电量时拔掉电源合上盖子，过一晚上电量只下降不到5%，然而却无法唤醒。而如果只是拔掉电源合上盖子几个小时，是可以马上唤醒的。  
+因此我的情况应该是出现在autopoweroff。我的autopoweroffdelay是28800即8小时，也就是睡眠了一个晚上超过8小时后进行了autopoweroff，然后无法从硬盘唤醒。  
 
 可以在terminal中查看Power Management的standby和hibernate模式  
 ```pmset -g```  
@@ -118,8 +120,11 @@ autopoweroffdelay specifies the delay, in seconds, before entering autopoweroff 
 
 解决方法：  
 
-禁用standby  
-```sudo pmset -a standby 0```    
+禁用standby和autopoweroff  
+```
+sudo pmset -a standby 0
+sudo pmset -a autopoweroff 0
+```    
 
 后续问题：  
 禁用standby后，拔掉电源sleep一段时间后不会进入hibernate，但会同时把内存的内容制作成镜像(hibernation image)写入硬盘。因此电脑会持续给内存供电，唤醒时从内存唤醒，除非电池没电了才会从硬盘唤醒。这虽然解决了第三方硬盘不支持standby模式的问题，但也会导致睡眠时电池耗电加快。  
