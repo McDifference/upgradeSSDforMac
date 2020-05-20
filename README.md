@@ -64,7 +64,7 @@ https://support.apple.com/zh-cn/HT204063
 网上找到很多人都有这种情况，共同点就是更换过硬盘并系统升级到了Catalina  
 个人分析，原因在于Catalina下休眠后从硬盘恢复会出错  
 关于macOS的睡眠(sleep)、休眠(hibernate)以及standby模式的资料如下： 
-/```
+```
 Hibernate mode : supports values of 0, 3, or 25.
 
 Whether or not a hibernation image gets written is also dependent on the values of standby and autopoweroff.
@@ -76,17 +76,13 @@ Whether or not a hibernation image gets written is also dependent on the values 
 25 is only settable via pmset. The system will store a copy of memory to persistent storage (the disk), and will remove power to memory. The system will restore from disk image. If you want "hibernation" slower sleeps, slower wakes, and better battery life, you should use this setting.
 
 standby causes kernel power management to automatically hibernate a machine after it has slept for a specified time period. This saves power while asleep. This setting defaults to ON for supported hardware. The setting standby will be visible in pmset -g if the feature is supported on this machine.
-/```
+```  
 
 解决方法：  
-查看standby和hibernate模式   
-/```
-pmset -g
-/```
-禁用standby
-/```
-sudo pmset -a standby 0
-/```
+查看standby和hibernate模式  
+```pmset -g```  
+禁用standby  
+```sudo pmset -a standby 0```  
 参考资料(https://www.reddit.com/r/MacOS/comments/dme38s/sleep_wake_failure_in_efi/)  
 
 后续问题：  
