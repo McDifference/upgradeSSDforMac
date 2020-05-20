@@ -62,7 +62,19 @@ https://support.apple.com/zh-cn/HT204063
 问题出现的原因：  
 
 网上找到很多人都有这种情况，共同点就是更换过硬盘并系统升级到了Catalina  
-个人分析，原因在于Catalina下休眠后从硬盘恢复会出错  
+原因在于Catalina下休眠后从硬盘恢复会出错。具体而言，
+```
+在hibernatemode 3情形下，其休眠受standbydelayhigh和standbydelaylow的两个数值之间的某个时间点，机器自动将内存里的数据写入到硬盘。而第三方的硬盘往往无法在此过程中被识别出来，导致了长时间休眠后睡死唤不醒。
+```   
+(https://blog.csdn.net/hitpisces/article/details/90907498)
+
+可以在terminal中查看Power Management的standby和hibernate模式  
+```pmset -g```  
+若standby为1且在电池模式下  
+1. 若电量大于highstandbythreshold，则在睡眠standbydelayhigh秒后把内存的内容(sleep image)写入硬盘  
+2. 若电量小于highstandbythreshold，则在睡眠standbydelaylow秒后把内存的内容(sleep image)写入硬盘  
+(https://www.qiansw.com/in-depth-study-of-mac-os-sleep-mode.html)  
+
 关于macOS的睡眠(sleep)、休眠(hibernate)以及standby模式的资料如下： 
 ```
 Hibernate mode : supports values of 0, 3, or 25.
@@ -79,11 +91,10 @@ standby causes kernel power management to automatically hibernate a machine afte
 ```  
 
 解决方法：  
-查看standby和hibernate模式  
-```pmset -g```  
+
 禁用standby  
 ```sudo pmset -a standby 0```  
 参考资料(https://www.reddit.com/r/MacOS/comments/dme38s/sleep_wake_failure_in_efi/)  
 
 后续问题：  
-禁用standby后，拔掉电源sleep一段时间后不会进入hibernate，因此电脑会持续给内存供电，唤醒时从内存唤醒，不会从硬盘唤醒。这虽然解决了无法从硬盘唤醒的问题，但也会导致电池耗电加快。如果电池没电了，内存中保存的内容就会消失，自动关机，关机前的内容无法恢复。所以建议养成每次断掉电源前保存重要内容的习惯。   
+禁用standby后，拔掉电源sleep一段时间后不会进入hibernate，但会同时把内存的内容制作成镜像(sleep image)写入硬盘。因此电脑会持续给内存供电，唤醒时从内存唤醒，除非电池没电了才会从硬盘唤醒。这虽然解决了第三方硬盘不支持standby模式的问题，但也会导致睡眠时电池耗电加快。  
