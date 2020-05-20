@@ -95,11 +95,22 @@ The system will wake from memory, unless a power loss forces it to restore from 
 The system will store a copy of memory to persistent storage (the disk), and will remove power to memory.   
 The system will restore from disk image.   
 If you want "hibernation" slower sleeps, slower wakes, and better battery life, you should use this setting.
+```  
+```
+standby causes kernel power management to automatically hibernate a machine after it has slept for a specified time period.  
+This saves power while asleep. This setting defaults to ON for supported hardware.  
+The setting standby will be visible in pmset -g if the feature is supported on this machine.  
 
-standby causes kernel power management to automatically hibernate a machine after it has slept for a specified time period.   
-This saves power while asleep.   
-This setting defaults to ON for supported hardware.   
-The setting standby will be visible in pmset -g if the feature is supported on this machine.
+standbydelayhigh and standbydelaylow specify the delay, in seconds, before writing the hibernation image to disk and powering off memory for Standby.  
+standbydelayhigh is used when the remaining battery capacity is above highstandbythreshold , and standbydelaylow is used when the remaining battery capacity is below highstandbythreshold.  
+
+highstandbythreshold has a default value of 50 percent.  
+```  
+```
+autopoweroff is enabled by default on supported platforms as an implementation of Lot 6 to the European Energy-related Products Directive.  After sleeping for <autopoweroffdelay> seconds, the system will write a hibernation image and go into a lower power chipset sleep.  
+Wakeups from this state will take longer than wakeups from regular sleep.  
+
+autopoweroffdelay specifies the delay, in seconds, before entering autopoweroff mode.  
 ```  
 
 解决方法：  
