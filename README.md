@@ -86,4 +86,4 @@ standby causes kernel power management to automatically hibernate a machine afte
 参考资料(https://www.reddit.com/r/MacOS/comments/dme38s/sleep_wake_failure_in_efi/)  
 
 后续问题：  
-禁用standby后，拔掉电源sleep一段时间后不会进入hibernate，因此电脑会持续给内存供电，唤醒时从内存唤醒，不会从硬盘唤醒。这虽然解决了无法从硬盘唤醒的问题，但也会导致电池耗电加快  
+禁用standby后，拔掉电源sleep一段时间后不会进入hibernate，因此电脑会持续给内存供电，唤醒时从内存唤醒，不会从硬盘唤醒。这虽然解决了无法从硬盘唤醒的问题，但也会导致电池耗电加快。如果电池没电了，内存中保存的内容就会消失，自动关机，关机前的内容无法恢复。所以建议养成每次断掉电源前保存重要内容的习惯。   
